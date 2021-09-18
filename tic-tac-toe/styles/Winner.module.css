@@ -1,0 +1,21 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 5rem;
+  color: #0784b5;
+}
+.newGame {
+  width: 30%;
+  height: 10%;
+  border-radius: 8px;
+  border: none;
+  background-color: #0784b5;
+  color: #192428;
+  font-size: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+}
