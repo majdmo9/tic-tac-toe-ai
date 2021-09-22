@@ -4,24 +4,30 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 5rem;
+  justify-content: space-around;
+  font-size: 7vw;
   color: #0784b5;
+  margin-bottom: 10%;
 }
 .buttonsDiv {
-  width: 60%;
+  width: 100%;
   height: 15%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  background-color: #192428;
 }
 .Button {
-  width: 30%;
+  width: 20%;
   height: 100%;
   border-radius: 8px;
   border: none;
   background-color: #0784b5;
   color: #192428;
-  font-size: 5rem;
+  font-size: 7vw;
   font-weight: 600;
   cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }

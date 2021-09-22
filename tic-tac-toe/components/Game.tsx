@@ -28,11 +28,11 @@ const Game: FunctionComponent = () => {
   }, []);
   //* AI player move
   const computerTurn = (squares: SquareType[]): SquareType[] => {
-    let bestScore = -Infinity;
     let move = -1;
+    let bestScore = -Infinity;
     for (let i = 0; i < squares.length; i++) {
       if (!squares[i]) {
-        squares[i] = nextPlayer ? "X" : "O";
+        squares[i] = !nextPlayer ? "X" : "O";
         let score = minimax(squares, 0, false, nextPlayer);
         squares[i] = null;
         if (score > bestScore) {
@@ -41,6 +41,7 @@ const Game: FunctionComponent = () => {
         }
       }
     }
+
     if (move !== -1) {
       squares[move] = !nextPlayer ? "X" : "O";
     }
@@ -77,10 +78,10 @@ const Game: FunctionComponent = () => {
   };
   return (
     <div className={style.container}>
-      {selectPlayer === null && !history.find((el) => el === null) ? (
-        <SelectPlayer setPlayer={(xo) => setPlayer(xo)} />
-      ) : winner !== null || history.find((el) => el === null) === undefined ? (
+      {winner !== null || history.find((el) => el === null) === undefined ? (
         <Winner winner={winner} onClose={newGame} />
+      ) : history.every((el) => el === null) && selectPlayer === null ? (
+        <SelectPlayer setPlayer={(xo) => setPlayer(xo)} />
       ) : (
         <Board onClick={(i: number) => handleClick(i)} squares={history} />
       )}

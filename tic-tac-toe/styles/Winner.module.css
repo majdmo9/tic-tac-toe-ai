@@ -5,17 +5,21 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  font-size: 5rem;
+  font-size: 7vw;
   color: #0784b5;
+  margin-bottom: 10%;
 }
 .newGame {
   width: 30%;
-  height: 10%;
+  height: 15%;
   border-radius: 8px;
   border: none;
   background-color: #0784b5;
   color: #192428;
-  font-size: 2rem;
+  font-size: 4vw;
   font-weight: 600;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
