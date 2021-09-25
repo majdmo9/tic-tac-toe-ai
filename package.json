@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/src/index.js",
+    "start": "node dist/index.js",
     "server": "nodemon src/index.ts",
-    "devStart": "concurrently \"npm run server\" \"npm run dev --prefix tic-tac-toe\"",
+    "devStart": "concurrently \"npm run start\" \"npm run start --prefix tic-tac-toe\"",
     "build": "tsc -p ."
   },
   "keywords": [],
