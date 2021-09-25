@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon dist/src/index.js",
+    "start": "node dist/src/index.js",
     "server": "nodemon src/index.ts",
     "devStart": "concurrently \"npm run server\" \"npm run dev --prefix tic-tac-toe\"",
     "build": "tsc -p ."
