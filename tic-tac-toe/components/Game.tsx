@@ -7,7 +7,7 @@ import style from "../styles/Game.module.css";
 import minimax from "../helper/minimax";
 import Winner from "./Winner";
 
-const URL = "http://localhost:5000/random";
+const URL = "https://tic-tac-toe-ai1.herokuapp.com/random";
 type SquareType = "X" | "O" | null;
 const Game: FunctionComponent = () => {
   const [nextPlayer, setNextPlayer] = useState<boolean>(true);
