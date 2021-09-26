@@ -9,7 +9,7 @@
     "server": "nodemon src/index.ts",
     "devStart": "concurrently \"npm run start\" \"npm run start --prefix tic-tac-toe\"",
     "build": "tsc -p .",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ../tic-tac-toe && npm run build --prefix ../tic-tac-toe"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix tic-tac-toe && npm run build --prefix tic-tac-toe"
   },
   "keywords": [],
   "author": "",
