@@ -7,9 +7,9 @@ const minimax = (
   isMaximizing: boolean,
   nextPlayer: boolean
 ): number => {
-  const scores = {
-    X: nextPlayer?-1:1,
-    O: nextPlayer?1:-1,
+  const scores: { X: number; O: number; tie: 0 } = {
+    X: nextPlayer ? -1 : 1,
+    O: nextPlayer ? 1 : -1,
     tie: 0,
   };
 

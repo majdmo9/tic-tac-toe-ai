@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Game from "../components/Game";
+import { AuthContextProvider } from "../helper/authContext";
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
@@ -12,7 +13,9 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <Game />
+        <AuthContextProvider>
+          <Game />
+        </AuthContextProvider>
       </main>
     </div>
   );

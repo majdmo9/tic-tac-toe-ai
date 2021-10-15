@@ -1,27 +1,47 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
+import React, {
+  FunctionComponent,
+  useState,
+  useEffect,
+  useContext,
+} from "react";
 import Board from "./Board";
 import axios from "axios";
 import CalculateWinner from "../helper/CalculateWinner";
 import SelectPlayer from "./SelectPlayer";
 import style from "../styles/Game.module.css";
 import minimax from "../helper/minimax";
+import AuthContext from "../helper/authContext";
 import Winner from "./Winner";
+import { v4 as uuidv4 } from "uuid";
 
-const URL = "https://tic-tac-toe-ai1.herokuapp.com/random";
 type SquareType = "X" | "O" | null;
 const Game: FunctionComponent = () => {
   const [nextPlayer, setNextPlayer] = useState<boolean>(true);
   const [selectPlayer, setSelectPlayer] = useState<boolean | null>(null);
   const [history, setHistory] = useState<SquareType[]>(Array(9).fill(null));
   const [winner, setWinner] = useState<SquareType>(null);
+  const val = useContext(AuthContext);
+  const [uuid, setUuid] = useState<string>("");
+
+  const URL: string = "https://tic-tac-toe-ai1.herokuapp.com/";
   //* When history change
   useEffect(() => {
     setWinner(CalculateWinner(history));
   }, [history]);
   //* When refreshing
   useEffect(() => {
+    //! Generate id
     const getHistory = async () => {
-      const res = await axios.get(URL);
+      const id: string | null = localStorage.getItem("uuid");
+      if (id) setUuid(id);
+      else localStorage.setItem("uuid", uuidv4());
+      if (history.every((el) => el === null)) {
+        await axios.post(URL, {
+          history: history,
+          id: uuid,
+        });
+      }
+      const res = await axios.get(URL + uuid);
       setHistory(res.data);
     };
     getHistory();
@@ -58,6 +78,7 @@ const Game: FunctionComponent = () => {
     setHistory(squares);
     await axios.post(URL, {
       history: squares,
+      id: uuid,
     });
   };
   //* On clicking play again
@@ -76,6 +97,7 @@ const Game: FunctionComponent = () => {
     setSelectPlayer(xo);
     setNextPlayer(xo);
   };
+
   return (
     <div className={style.container}>
       {winner !== null || history.find((el) => el === null) === undefined ? (
