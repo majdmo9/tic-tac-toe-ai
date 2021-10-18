@@ -21,7 +21,8 @@ app.use(function (req, res, next) {
 });
 //? Getting the state from cache when refreshing the page
 app.get("/:id", (req, res, next) => {
-    const { id } = req.params;
+    let { id } = req.params;
+    id = id.replace("favicon.ico", "");
     console.log(id);
     client.get(id, (err, data) => {
         if (err)
@@ -32,7 +33,7 @@ app.get("/:id", (req, res, next) => {
     });
 });
 //? save the state in redis cache memory on every single move
-app.post("/", (req, res, next) => {
+app.post("/:id", (req, res, next) => {
     const { history, id } = req.body;
     console.log(req.body);
     client.set(id, JSON.stringify(history));
