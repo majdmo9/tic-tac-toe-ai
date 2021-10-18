@@ -21,29 +21,32 @@ const Game: FunctionComponent = () => {
   const [history, setHistory] = useState<SquareType[]>(Array(9).fill(null));
   const [winner, setWinner] = useState<SquareType>(null);
   const val = useContext(AuthContext);
-  const [uuid, setUuid] = useState<string>("");
+  const [uuid, setUuid] = useState<string | null>("");
 
   const URL: string = "https://tic-tac-toe-ai1.herokuapp.com/";
+
   //* When history change
   useEffect(() => {
     setWinner(CalculateWinner(history));
   }, [history]);
+
+  const getHistory = async () => {
+    //! Generate id
+    const id: string | null = localStorage.getItem("uuid");
+    if (id) {
+      setUuid(id);
+      console.log(URL + id);
+      const res = await axios.get(URL + id);
+      res.data ? setHistory(res.data) : setHistory(history);
+      console.log(history);
+    } else {
+      localStorage.setItem("uuid", uuidv4());
+      setUuid(localStorage.getItem("uuid"));
+    }
+  };
+
   //* When refreshing
   useEffect(() => {
-    //! Generate id
-    const getHistory = async () => {
-      const id: string | null = localStorage.getItem("uuid");
-      if (id) setUuid(id);
-      else localStorage.setItem("uuid", uuidv4());
-      if (history.every((el) => el === null)) {
-        await axios.post(URL, {
-          history: history,
-          id: uuid,
-        });
-      }
-      const res = await axios.get(URL + uuid);
-      setHistory(res.data);
-    };
     getHistory();
   }, []);
   //* AI player move
@@ -72,24 +75,27 @@ const Game: FunctionComponent = () => {
     if (CalculateWinner(squares)) {
       return;
     }
-
+    console.log(uuid);
     squares[i] = nextPlayer ? "X" : "O";
     squares = computerTurn(squares);
     setHistory(squares);
-    await axios.post(URL, {
+    await axios.post(URL + uuid, {
       history: squares,
       id: uuid,
     });
   };
   //* On clicking play again
   const newGame = async () => {
-    const clearHistory = history.slice();
-    clearHistory.fill(null);
+    let clearHistory = history.slice();
+    clearHistory = [null, null, null, null, null, null, null, null, null];
     setHistory(clearHistory);
     setWinner(null);
     setSelectPlayer(null);
-    await axios.post(URL, {
+    console.log(clearHistory);
+
+    await axios.post(URL + uuid, {
       history: clearHistory,
+      id: uuid,
     });
   };
   //* Choose player X or O
@@ -100,9 +106,9 @@ const Game: FunctionComponent = () => {
 
   return (
     <div className={style.container}>
-      {winner !== null || history.find((el) => el === null) === undefined ? (
+      {winner !== null || history?.find((el) => el === null) === undefined ? (
         <Winner winner={winner} onClose={newGame} />
-      ) : history.every((el) => el === null) && selectPlayer === null ? (
+      ) : history?.every((el) => el === null) && selectPlayer === null ? (
         <SelectPlayer setPlayer={(xo) => setPlayer(xo)} />
       ) : (
         <Board onClick={(i: number) => handleClick(i)} squares={history} />

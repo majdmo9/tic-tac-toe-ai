@@ -28,7 +28,8 @@ app.use(function (req: Request, res: Response, next: NextFunction) {
 type SquareType = "X" | "O" | null;
 //? Getting the state from cache when refreshing the page
 app.get("/:id", (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.params;
+  let { id } = req.params;
+  id = id.replace("favicon.ico", "");
   console.log(id);
 
   client.get(id, (err: ErrorRequestHandler, data: SquareType[]) => {
@@ -39,7 +40,7 @@ app.get("/:id", (req: Request, res: Response, next: NextFunction) => {
   });
 });
 //? save the state in redis cache memory on every single move
-app.post("/", (req: Request, res: Response, next: NextFunction) => {
+app.post("/:id", (req: Request, res: Response, next: NextFunction) => {
   const { history, id } = req.body;
   console.log(req.body);
   client.set(id, JSON.stringify(history));
