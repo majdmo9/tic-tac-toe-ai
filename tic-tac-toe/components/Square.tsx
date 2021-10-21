@@ -17,10 +17,13 @@ const Square: FunctionComponent<Props> = ({ onClick, value }) => {
           background: #192428;
           border: none;
           border-radius: 5px;
-          font-size: 5rem;
+          font-size: 10vw;
           font-weight: 800;
           cursor: pointer;
           outline: none;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
         }
         .X {
           color: #39ace7;

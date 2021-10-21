@@ -1,6 +1,6 @@
 .board {
   display: grid;
-  grid-template: repeat(3, minmax(10px, 1fr)) / repeat(3, minmax(10px, 1fr));
+  grid-template: repeat(3, minmax(5vh, 1fr)) / repeat(3, minmax(5vw, 1fr));
   gap: 6px;
   width: 67%;
   height: 67%;

@@ -23,5 +23,5 @@
     "eslint-config-next": "11.1.2",
     "typescript": "4.4.3"
   },
-  "proxy": "https://tic-tac-toe-ai1.herokuapp.com/"
+  "proxy": "https://tic-tac-toe-ai2.herokuapp.com"
 }

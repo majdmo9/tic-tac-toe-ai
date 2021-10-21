@@ -23,7 +23,7 @@ const Game: FunctionComponent = () => {
   const val = useContext(AuthContext);
   const [uuid, setUuid] = useState<string | null>("");
 
-  const URL: string = "https://tic-tac-toe-ai2.herokuapp.com/";
+  const URL: string = "https://tic-tac-toe-ai2.herokuapp.com";
 
   //* When history change
   useEffect(() => {
@@ -35,7 +35,7 @@ const Game: FunctionComponent = () => {
     const id: string | null = localStorage.getItem("uuid");
     if (id) {
       setUuid(id);
-      const res = await axios.get(URL + id);
+      const res = await axios.get(URL + "/" + id);
       res.data ? setHistory(res.data) : setHistory(history);
     } else {
       localStorage.setItem("uuid", uuidv4());
@@ -76,7 +76,7 @@ const Game: FunctionComponent = () => {
     squares[i] = nextPlayer ? "X" : "O";
     squares = computerTurn(squares);
     setHistory(squares);
-    await axios.post(URL + uuid, {
+    await axios.post(URL, {
       history: squares,
       id: uuid,
     });
@@ -87,7 +87,7 @@ const Game: FunctionComponent = () => {
     setHistory(clearHistory);
     setWinner(null);
     setSelectPlayer(null);
-    await axios.post(URL + uuid, {
+    await axios.post(URL, {
       history: clearHistory,
       id: uuid,
     });
