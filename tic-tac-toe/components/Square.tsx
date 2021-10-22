@@ -23,7 +23,7 @@ const Square: FunctionComponent<Props> = ({ onClick, value }) => {
           outline: none;
           display: flex;
           align-items: center;
-          justify-content: space-around;
+          justify-content: center;
         }
         .X {
           color: #39ace7;

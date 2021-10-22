@@ -16,6 +16,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@iconify/react": "^3.0.1",
     "@types/axios": "^0.14.0",
     "@types/react": "^17.0.21",
     "@types/uuid": "^8.3.1",

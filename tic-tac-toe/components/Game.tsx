@@ -20,7 +20,6 @@ const Game: FunctionComponent = () => {
   const [selectPlayer, setSelectPlayer] = useState<boolean | null>(null);
   const [history, setHistory] = useState<SquareType[]>(Array(9).fill(null));
   const [winner, setWinner] = useState<SquareType>(null);
-  const val = useContext(AuthContext);
   const [uuid, setUuid] = useState<string | null>("");
 
   const URL: string = "https://tic-tac-toe-ai2.herokuapp.com";
