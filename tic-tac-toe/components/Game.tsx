@@ -72,13 +72,15 @@ const Game: FunctionComponent = () => {
     if (CalculateWinner(squares)) {
       return;
     }
-    squares[i] = nextPlayer ? "X" : "O";
-    squares = computerTurn(squares);
-    setHistory(squares);
-    await axios.post(URL, {
-      history: squares,
-      id: uuid,
-    });
+    if (!squares[i]) {
+      squares[i] = nextPlayer ? "X" : "O";
+      squares = computerTurn(squares);
+      setHistory(squares);
+      await axios.post(URL, {
+        history: squares,
+        id: uuid,
+      });
+    }
   };
   //* On clicking play again
   const newGame = async () => {
