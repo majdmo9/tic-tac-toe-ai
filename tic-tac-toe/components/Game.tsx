@@ -10,7 +10,6 @@ import CalculateWinner from "../helper/CalculateWinner";
 import SelectPlayer from "./SelectPlayer";
 import style from "../styles/Game.module.css";
 import minimax from "../helper/minimax";
-import AuthContext from "../helper/authContext";
 import Winner from "./Winner";
 import { v4 as uuidv4 } from "uuid";
 
